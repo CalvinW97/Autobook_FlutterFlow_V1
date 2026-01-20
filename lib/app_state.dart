@@ -54,4 +54,11 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInMyRegistration(int index, String value) {
     myRegistration.insert(index, value);
   }
+
+  /// Selector for garage tab
+  int _garageTabIndex = 0;
+  int get garageTabIndex => _garageTabIndex;
+  set garageTabIndex(int value) {
+    _garageTabIndex = value;
+  }
 }

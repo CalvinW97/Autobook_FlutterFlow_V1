@@ -33,9 +33,18 @@ class VehiclesRow extends SupabaseDataRow {
   set yearOfManufacture(int? value) =>
       setField<int>('year_of_manufacture', value);
 
-  DateTime? get motDueDate => getField<DateTime>('mot_due_date');
-  set motDueDate(DateTime? value) => setField<DateTime>('mot_due_date', value);
+  String? get motDueDate => getField<String>('mot_due_date');
+  set motDueDate(String? value) => setField<String>('mot_due_date', value);
 
-  DateTime? get createdAt => getField<DateTime>('created_at');
-  set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
+  String? get createdAt => getField<String>('created_at');
+  set createdAt(String? value) => setField<String>('created_at', value);
+
+  String? get colour => getField<String>('colour');
+  set colour(String? value) => setField<String>('colour', value);
+
+  String? get taxDueDate => getField<String>('tax_due_date');
+  set taxDueDate(String? value) => setField<String>('tax_due_date', value);
+
+  String? get fuelType => getField<String>('fuel_type');
+  set fuelType(String? value) => setField<String>('fuel_type', value);
 }

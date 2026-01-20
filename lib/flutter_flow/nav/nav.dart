@@ -96,6 +96,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => BusinessHomeWidget(),
         ),
         FFRoute(
+          name: VehicleDetailsPageWidget.routeName,
+          path: VehicleDetailsPageWidget.routePath,
+          builder: (context, params) => VehicleDetailsPageWidget(
+            carID: params.getParam(
+              'carID',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: JobDetailsPageWidget.routeName,
+          path: JobDetailsPageWidget.routePath,
+          builder: (context, params) => JobDetailsPageWidget(
+            carID: params.getParam(
+              'carID',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ServicesHomePageWidget.routeName,
+          path: ServicesHomePageWidget.routePath,
+          builder: (context, params) => ServicesHomePageWidget(),
+        ),
+        FFRoute(
+          name: CreateServicePageWidget.routeName,
+          path: CreateServicePageWidget.routePath,
+          builder: (context, params) => CreateServicePageWidget(),
+        ),
+        FFRoute(
           name: UserHomeWidget.routeName,
           path: UserHomeWidget.routePath,
           builder: (context, params) => UserHomeWidget(),

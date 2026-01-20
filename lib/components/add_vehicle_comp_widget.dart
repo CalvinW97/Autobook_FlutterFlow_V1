@@ -246,6 +246,7 @@ class _AddVehicleCompWidgetState extends State<AddVehicleCompWidget> {
                               _model.cleanReg = (String input) {
                                 return input.replaceAll(' ', '').toUpperCase();
                               }(_model.vehicleRegEntryTextController.text);
+                              _model.updatePage(() {});
                               // Submit Reg Number
                               FFAppState()
                                   .addToMyRegistration(_model.cleanReg!);
@@ -295,28 +296,41 @@ class _AddVehicleCompWidgetState extends State<AddVehicleCompWidget> {
                                 _shouldSetState = true;
                               }
 
-                              if (getJsonField(
-                                    (_model.vehicleMetaData?.jsonBody ?? ''),
-                                    r'''$.data.AWN_marque''',
-                                  ) !=
-                                  null) {
+                              if (VehicleRegCallCall.carMake(
+                                        (_model.vehicleMetaData?.jsonBody ??
+                                            ''),
+                                      ) !=
+                                      null &&
+                                  VehicleRegCallCall.carMake(
+                                        (_model.vehicleMetaData?.jsonBody ??
+                                            ''),
+                                      ) !=
+                                      '') {
                                 // Update_Vehicles_Supabase
                                 await VehiclesTable().insert({
                                   'owner_id': currentUserUid,
                                   'reg_number': _model.cleanReg,
                                   'make': valueOrDefault<String>(
-                                    getJsonField(
+                                    VehicleRegCallCall.carMake(
                                       (_model.vehicleMetaData?.jsonBody ?? ''),
-                                      r'''$.data.AWN_marque''',
-                                    )?.toString(),
+                                    ),
                                     'CAR',
                                   ),
-                                  'model': valueOrDefault<String>(
-                                    getJsonField(
-                                      (_model.vehicleMetaData?.jsonBody ?? ''),
-                                      r'''$.data.AWN_modele''',
-                                    )?.toString(),
-                                    'CAR',
+                                  'year_of_manufacture':
+                                      VehicleRegCallCall.carYear(
+                                    (_model.vehicleMetaData?.jsonBody ?? ''),
+                                  ),
+                                  'mot_due_date': VehicleRegCallCall.carMOT(
+                                    (_model.vehicleMetaData?.jsonBody ?? ''),
+                                  ),
+                                  'tax_due_date': VehicleRegCallCall.carTax(
+                                    (_model.vehicleMetaData?.jsonBody ?? ''),
+                                  ),
+                                  'colour': VehicleRegCallCall.carColour(
+                                    (_model.vehicleMetaData?.jsonBody ?? ''),
+                                  ),
+                                  'fuel_type': VehicleRegCallCall.carFuel(
+                                    (_model.vehicleMetaData?.jsonBody ?? ''),
                                   ),
                                 });
                               } else {

@@ -9,6 +9,8 @@ class AddVehicleCompModel extends FlutterFlowModel<AddVehicleCompWidget> {
 
   String? cleanReg;
 
+  String? carMake2;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for Vehicle_Reg_Entry widget.

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'nav_footer_widget.dart' show NavFooterWidget;
+import 'garage_nav_footer_widget.dart' show GarageNavFooterWidget;
 import 'package:flutter/material.dart';
 
-class NavFooterModel extends FlutterFlowModel<NavFooterWidget> {
+class GarageNavFooterModel extends FlutterFlowModel<GarageNavFooterWidget> {
   @override
   void initState(BuildContext context) {}
 

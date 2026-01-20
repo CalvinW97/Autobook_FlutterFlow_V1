@@ -1,4 +1,5 @@
-import '/components/nav_footer_widget.dart';
+import '/components/car_card_widget.dart';
+import '/components/user_nav_footer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'user_home_widget.dart' show UserHomeWidget;
@@ -11,6 +12,8 @@ class UserHomeModel extends FlutterFlowModel<UserHomeWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Models for CarCard dynamic component.
+  late FlutterFlowDynamicModels<CarCardModel> carCardModels;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -24,22 +27,24 @@ class UserHomeModel extends FlutterFlowModel<UserHomeWidget> {
   FormFieldController<String>? dropDownValueController;
   // State field(s) for Switch widget.
   bool? switchValue;
-  // Model for Nav_Footer component.
-  late NavFooterModel navFooterModel;
+  // Model for User_Nav_Footer component.
+  late UserNavFooterModel userNavFooterModel;
 
   @override
   void initState(BuildContext context) {
-    navFooterModel = createModel(context, () => NavFooterModel());
+    carCardModels = FlutterFlowDynamicModels(() => CarCardModel());
+    userNavFooterModel = createModel(context, () => UserNavFooterModel());
   }
 
   @override
   void dispose() {
+    carCardModels.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
 
-    navFooterModel.dispose();
+    userNavFooterModel.dispose();
   }
 }

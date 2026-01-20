@@ -38,4 +38,7 @@ class GaragesRow extends SupabaseDataRow {
 
   DateTime? get createdAt => getField<DateTime>('created_at');
   set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
+
+  String? get companyNumber => getField<String>('company_number');
+  set companyNumber(String? value) => setField<String>('company_number', value);
 }

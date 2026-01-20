@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -11,17 +12,23 @@ class VehicleRegCallCall {
   static Future<ApiCallResponse> call({
     String? registration = 'YL64FCU',
   }) async {
+    final ffApiRequestBody = '''
+{
+  "registrationNum": "${escapeStringForJson(registration)}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'VehicleRegCall',
       apiUrl:
-          'https://uk-vehicle-registration-api-british-vehicle-lookup.p.rapidapi.com/?plaque=${registration}',
-      callType: ApiCallType.GET,
+          'https://btvwzlnuqyuawapthbrg.supabase.co/functions/v1/get_vehicle_details',
+      callType: ApiCallType.POST,
       headers: {
-        'X-RapidAPI-Key': 'a72fb41ca4msh51e87d9b8825b0bp19bcefjsn4229c3d28519',
-        'X-RapidAPI-Host':
-            'uk-vehicle-registration-api-british-vehicle-lookup.p.rapidapi.com',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dnd6bG51cXl1YXdhcHRoYnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5Mzk1OTEsImV4cCI6MjA4MzUxNTU5MX0.ld6HhvKmEAMhnvk0qfCGM2hQsFNlcbHIzihSc6IyX5Q',
+        'Content-Type': 'application/json',
       },
       params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -30,6 +37,35 @@ class VehicleRegCallCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? carReg(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.registrationNumber''',
+      ));
+  static String? carTax(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.taxDueDate''',
+      ));
+  static String? carMake(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.make''',
+      ));
+  static int? carYear(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.yearOfManufacture''',
+      ));
+  static String? carFuel(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.fuelType''',
+      ));
+  static String? carColour(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.colour''',
+      ));
+  static String? carMOT(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.motExpiryDate''',
+      ));
 }
 
 class ApiPagingParams {
@@ -74,4 +110,15 @@ String _serializeJson(dynamic jsonVar, [bool isList = false]) {
     }
     return isList ? '[]' : '{}';
   }
+}
+
+String? escapeStringForJson(String? input) {
+  if (input == null) {
+    return null;
+  }
+  return input
+      .replaceAll('\\', '\\\\')
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', '\\n')
+      .replaceAll('\t', '\\t');
 }

@@ -3,18 +3,18 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'nav_footer_model.dart';
-export 'nav_footer_model.dart';
+import 'user_nav_footer_model.dart';
+export 'user_nav_footer_model.dart';
 
-class NavFooterWidget extends StatefulWidget {
-  const NavFooterWidget({super.key});
+class UserNavFooterWidget extends StatefulWidget {
+  const UserNavFooterWidget({super.key});
 
   @override
-  State<NavFooterWidget> createState() => _NavFooterWidgetState();
+  State<UserNavFooterWidget> createState() => _UserNavFooterWidgetState();
 }
 
-class _NavFooterWidgetState extends State<NavFooterWidget> {
-  late NavFooterModel _model;
+class _UserNavFooterWidgetState extends State<UserNavFooterWidget> {
+  late UserNavFooterModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -25,7 +25,7 @@ class _NavFooterWidgetState extends State<NavFooterWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => NavFooterModel());
+    _model = createModel(context, () => UserNavFooterModel());
   }
 
   @override
