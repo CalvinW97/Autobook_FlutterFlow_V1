@@ -592,13 +592,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
-                                                        onTap: () =>
-                                                            safeSetState(
-                                                          () => _model
+                                                        onTap: () async {
+                                                          safeSetState(() => _model
                                                                   .passwordVisibility =
                                                               !_model
-                                                                  .passwordVisibility,
-                                                        ),
+                                                                  .passwordVisibility);
+                                                        },
                                                         focusNode: FocusNode(
                                                             skipTraversal:
                                                                 true),
@@ -1533,13 +1532,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
-                                                        onTap: () =>
-                                                            safeSetState(
-                                                          () => _model
+                                                        onTap: () async {
+                                                          safeSetState(() => _model
                                                                   .passwordCreateVisibility =
                                                               !_model
-                                                                  .passwordCreateVisibility,
-                                                        ),
+                                                                  .passwordCreateVisibility);
+                                                        },
                                                         focusNode: FocusNode(
                                                             skipTraversal:
                                                                 true),
@@ -1698,13 +1696,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       contentPadding:
                                                           EdgeInsets.all(24.0),
                                                       suffixIcon: InkWell(
-                                                        onTap: () =>
-                                                            safeSetState(
-                                                          () => _model
+                                                        onTap: () async {
+                                                          safeSetState(() => _model
                                                                   .passwordConfirmVisibility =
                                                               !_model
-                                                                  .passwordConfirmVisibility,
-                                                        ),
+                                                                  .passwordConfirmVisibility);
+                                                        },
                                                         focusNode: FocusNode(
                                                             skipTraversal:
                                                                 true),
