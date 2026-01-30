@@ -226,6 +226,8 @@ dynamic deserializeParam<T>(
             return ProfilesRow(data);
           case GarageStaffRow:
             return GarageStaffRow(data);
+          case ServicesRow:
+            return ServicesRow(data);
           case MessagesRow:
             return MessagesRow(data);
           default:

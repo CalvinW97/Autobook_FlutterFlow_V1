@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -680,8 +681,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         return;
                                                       }
 
+                                                      await action_blocks
+                                                          .syncUserSession(
+                                                              context);
+
                                                       context.goNamedAuth(
-                                                          UserHomeWidget
+                                                          BusinessHomeWidget
                                                               .routeName,
                                                           context.mounted);
                                                     },
@@ -1150,10 +1155,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ChipData('User'),
                                                             ChipData('Business')
                                                           ],
-                                                          onChanged: (val) =>
-                                                              safeSetState(() =>
-                                                                  _model.selectUserTypeValue =
-                                                                      val?.firstOrNull),
+                                                          onChanged:
+                                                              (val) async {
+                                                            safeSetState(() => _model
+                                                                    .selectUserTypeValue =
+                                                                val?.firstOrNull);
+                                                            _model.signUpType =
+                                                                _model
+                                                                    .selectUserTypeValue!;
+                                                            safeSetState(() {});
+                                                          },
                                                           selectedChipStyle:
                                                               ChipStyle(
                                                             backgroundColor:
@@ -1803,23 +1814,36 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                       await Future.delayed(
                                                         Duration(
-                                                          milliseconds: 1000,
+                                                          milliseconds: 100,
                                                         ),
                                                       );
-                                                      await ProfilesTable()
-                                                          .insert({
-                                                        'id': currentUserUid,
-                                                      });
-                                                      if (_model
-                                                              .selectUserTypeValue ==
+                                                      if (_model.signUpType ==
                                                           'User') {
+                                                        await ProfilesTable()
+                                                            .insert({
+                                                          'id': currentUserUid,
+                                                          'role': 'user',
+                                                        });
+                                                        await action_blocks
+                                                            .syncUserSession(
+                                                                context);
+
                                                         context.pushNamedAuth(
                                                             UserHomeWidget
                                                                 .routeName,
                                                             context.mounted);
                                                       } else {
+                                                        await ProfilesTable()
+                                                            .insert({
+                                                          'id': currentUserUid,
+                                                          'role': 'pending',
+                                                        });
+                                                        await action_blocks
+                                                            .syncUserSession(
+                                                                context);
+
                                                         context.pushNamedAuth(
-                                                            BusinessHomeWidget
+                                                            BusinessOnboardWidget
                                                                 .routeName,
                                                             context.mounted);
                                                       }

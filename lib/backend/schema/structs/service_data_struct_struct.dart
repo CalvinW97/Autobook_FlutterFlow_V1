@@ -5,20 +5,22 @@ import '/backend/schema/util/schema_util.dart';
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class ServiceTierStruct extends BaseStruct {
-  ServiceTierStruct({
+class ServiceDataStructStruct extends BaseStruct {
+  ServiceDataStructStruct({
     String? name,
     double? priceSmall,
     double? priceMedium,
     double? priceLarge,
-    List<String>? checklist,
     bool? isInstantBookable,
+    String? description,
+    String? type,
   })  : _name = name,
         _priceSmall = priceSmall,
         _priceMedium = priceMedium,
         _priceLarge = priceLarge,
-        _checklist = checklist,
-        _isInstantBookable = isInstantBookable;
+        _isInstantBookable = isInstantBookable,
+        _description = description,
+        _type = type;
 
   // "Name" field.
   String? _name;
@@ -55,17 +57,6 @@ class ServiceTierStruct extends BaseStruct {
 
   bool hasPriceLarge() => _priceLarge != null;
 
-  // "Checklist" field.
-  List<String>? _checklist;
-  List<String> get checklist => _checklist ?? const [];
-  set checklist(List<String>? val) => _checklist = val;
-
-  void updateChecklist(Function(List<String>) updateFn) {
-    updateFn(_checklist ??= []);
-  }
-
-  bool hasChecklist() => _checklist != null;
-
   // "IsInstantBookable" field.
   bool? _isInstantBookable;
   bool get isInstantBookable => _isInstantBookable ?? false;
@@ -73,18 +64,33 @@ class ServiceTierStruct extends BaseStruct {
 
   bool hasIsInstantBookable() => _isInstantBookable != null;
 
-  static ServiceTierStruct fromMap(Map<String, dynamic> data) =>
-      ServiceTierStruct(
+  // "Description" field.
+  String? _description;
+  String get description => _description ?? '';
+  set description(String? val) => _description = val;
+
+  bool hasDescription() => _description != null;
+
+  // "Type" field.
+  String? _type;
+  String get type => _type ?? '';
+  set type(String? val) => _type = val;
+
+  bool hasType() => _type != null;
+
+  static ServiceDataStructStruct fromMap(Map<String, dynamic> data) =>
+      ServiceDataStructStruct(
         name: data['Name'] as String?,
         priceSmall: castToType<double>(data['PriceSmall']),
         priceMedium: castToType<double>(data['PriceMedium']),
         priceLarge: castToType<double>(data['PriceLarge']),
-        checklist: getDataList(data['Checklist']),
         isInstantBookable: data['IsInstantBookable'] as bool?,
+        description: data['Description'] as String?,
+        type: data['Type'] as String?,
       );
 
-  static ServiceTierStruct? maybeFromMap(dynamic data) => data is Map
-      ? ServiceTierStruct.fromMap(data.cast<String, dynamic>())
+  static ServiceDataStructStruct? maybeFromMap(dynamic data) => data is Map
+      ? ServiceDataStructStruct.fromMap(data.cast<String, dynamic>())
       : null;
 
   Map<String, dynamic> toMap() => {
@@ -92,8 +98,9 @@ class ServiceTierStruct extends BaseStruct {
         'PriceSmall': _priceSmall,
         'PriceMedium': _priceMedium,
         'PriceLarge': _priceLarge,
-        'Checklist': _checklist,
         'IsInstantBookable': _isInstantBookable,
+        'Description': _description,
+        'Type': _type,
       }.withoutNulls;
 
   @override
@@ -114,19 +121,23 @@ class ServiceTierStruct extends BaseStruct {
           _priceLarge,
           ParamType.double,
         ),
-        'Checklist': serializeParam(
-          _checklist,
-          ParamType.String,
-          isList: true,
-        ),
         'IsInstantBookable': serializeParam(
           _isInstantBookable,
           ParamType.bool,
         ),
+        'Description': serializeParam(
+          _description,
+          ParamType.String,
+        ),
+        'Type': serializeParam(
+          _type,
+          ParamType.String,
+        ),
       }.withoutNulls;
 
-  static ServiceTierStruct fromSerializableMap(Map<String, dynamic> data) =>
-      ServiceTierStruct(
+  static ServiceDataStructStruct fromSerializableMap(
+          Map<String, dynamic> data) =>
+      ServiceDataStructStruct(
         name: deserializeParam(
           data['Name'],
           ParamType.String,
@@ -147,31 +158,36 @@ class ServiceTierStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
-        checklist: deserializeParam<String>(
-          data['Checklist'],
-          ParamType.String,
-          true,
-        ),
         isInstantBookable: deserializeParam(
           data['IsInstantBookable'],
           ParamType.bool,
           false,
         ),
+        description: deserializeParam(
+          data['Description'],
+          ParamType.String,
+          false,
+        ),
+        type: deserializeParam(
+          data['Type'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
-  String toString() => 'ServiceTierStruct(${toMap()})';
+  String toString() => 'ServiceDataStructStruct(${toMap()})';
 
   @override
   bool operator ==(Object other) {
-    const listEquality = ListEquality();
-    return other is ServiceTierStruct &&
+    return other is ServiceDataStructStruct &&
         name == other.name &&
         priceSmall == other.priceSmall &&
         priceMedium == other.priceMedium &&
         priceLarge == other.priceLarge &&
-        listEquality.equals(checklist, other.checklist) &&
-        isInstantBookable == other.isInstantBookable;
+        isInstantBookable == other.isInstantBookable &&
+        description == other.description &&
+        type == other.type;
   }
 
   @override
@@ -180,22 +196,27 @@ class ServiceTierStruct extends BaseStruct {
         priceSmall,
         priceMedium,
         priceLarge,
-        checklist,
-        isInstantBookable
+        isInstantBookable,
+        description,
+        type
       ]);
 }
 
-ServiceTierStruct createServiceTierStruct({
+ServiceDataStructStruct createServiceDataStructStruct({
   String? name,
   double? priceSmall,
   double? priceMedium,
   double? priceLarge,
   bool? isInstantBookable,
+  String? description,
+  String? type,
 }) =>
-    ServiceTierStruct(
+    ServiceDataStructStruct(
       name: name,
       priceSmall: priceSmall,
       priceMedium: priceMedium,
       priceLarge: priceLarge,
       isInstantBookable: isInstantBookable,
+      description: description,
+      type: type,
     );

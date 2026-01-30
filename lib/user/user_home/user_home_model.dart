@@ -1,7 +1,8 @@
-import '/components/car_card_widget.dart';
-import '/components/user_nav_footer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/user/car_card/car_card_widget.dart';
+import '/user/user_nav_footer/user_nav_footer_widget.dart';
+import '/index.dart';
 import 'user_home_widget.dart' show UserHomeWidget;
 import 'package:flutter/material.dart';
 

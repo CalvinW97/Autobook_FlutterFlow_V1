@@ -31,4 +31,7 @@ class ProfilesRow extends SupabaseDataRow {
 
   String? get postcode => getField<String>('postcode');
   set postcode(String? value) => setField<String>('postcode', value);
+
+  String? get garageId => getField<String>('garage_id');
+  set garageId(String? value) => setField<String>('garage_id', value);
 }

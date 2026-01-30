@@ -10,4 +10,5 @@ export 'tables/vehicles.dart';
 export 'tables/jobs.dart';
 export 'tables/profiles.dart';
 export 'tables/garage_staff.dart';
+export 'tables/services.dart';
 export 'tables/messages.dart';

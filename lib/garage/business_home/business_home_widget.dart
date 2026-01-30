@@ -1,8 +1,12 @@
-import '/components/garage_nav_footer_widget.dart';
+import '/auth/supabase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/garage/garage_nav_footer/garage_nav_footer_widget.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'business_home_model.dart';
@@ -34,6 +38,13 @@ class _BusinessHomeWidgetState extends State<BusinessHomeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BusinessHomeModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (loggedIn == false) {
+        await action_blocks.syncUserSession(context);
+      }
+    });
   }
 
   @override
@@ -479,6 +490,33 @@ class _BusinessHomeWidgetState extends State<BusinessHomeWidget> {
                       height: 100.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).primary,
+                              icon: Icon(
+                                Icons.logout_rounded,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                GoRouter.of(context).prepareAuthEvent();
+                                await authManager.signOut();
+                                GoRouter.of(context).clearRedirectLocation();
+
+                                context.pushNamedAuth(
+                                    LoginWidget.routeName, context.mounted);
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(

@@ -1,12 +1,15 @@
 // Export pages
-export '/login/login_widget.dart' show LoginWidget;
-export '/business_home/business_home_widget.dart' show BusinessHomeWidget;
-export '/vehicle_details_page/vehicle_details_page_widget.dart'
+export '/user/vehicle_details_page/vehicle_details_page_widget.dart'
     show VehicleDetailsPageWidget;
 export '/job_details_page/job_details_page_widget.dart'
     show JobDetailsPageWidget;
-export '/services_home_page/services_home_page_widget.dart'
+export '/login/login_widget.dart' show LoginWidget;
+export '/garage/business_home/business_home_widget.dart'
+    show BusinessHomeWidget;
+export '/garage/services_home_page/services_home_page_widget.dart'
     show ServicesHomePageWidget;
-export '/create_service_page/create_service_page_widget.dart'
+export '/garage/create_service_page/create_service_page_widget.dart'
     show CreateServicePageWidget;
-export '/user_home/user_home_widget.dart' show UserHomeWidget;
+export '/user/user_home/user_home_widget.dart' show UserHomeWidget;
+export '/garage/business_onboard/business_onboard_widget.dart'
+    show BusinessOnboardWidget;

@@ -79,23 +79,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? UserHomeWidget() : LoginWidget(),
+          appStateNotifier.loggedIn ? BusinessHomeWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? UserHomeWidget() : LoginWidget(),
-        ),
-        FFRoute(
-          name: LoginWidget.routeName,
-          path: LoginWidget.routePath,
-          builder: (context, params) => LoginWidget(),
-        ),
-        FFRoute(
-          name: BusinessHomeWidget.routeName,
-          path: BusinessHomeWidget.routePath,
-          builder: (context, params) => BusinessHomeWidget(),
+              appStateNotifier.loggedIn ? BusinessHomeWidget() : LoginWidget(),
         ),
         FFRoute(
           name: VehicleDetailsPageWidget.routeName,
@@ -118,6 +108,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
+        ),
+        FFRoute(
+          name: BusinessHomeWidget.routeName,
+          path: BusinessHomeWidget.routePath,
+          builder: (context, params) => BusinessHomeWidget(),
+        ),
+        FFRoute(
           name: ServicesHomePageWidget.routeName,
           path: ServicesHomePageWidget.routePath,
           builder: (context, params) => ServicesHomePageWidget(),
@@ -125,12 +125,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: CreateServicePageWidget.routeName,
           path: CreateServicePageWidget.routePath,
-          builder: (context, params) => CreateServicePageWidget(),
+          builder: (context, params) => CreateServicePageWidget(
+            serviceDataIn: params.getParam(
+              'serviceDataIn',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ServiceDataStructStruct.fromSerializableMap,
+            ),
+          ),
         ),
         FFRoute(
           name: UserHomeWidget.routeName,
           path: UserHomeWidget.routePath,
           builder: (context, params) => UserHomeWidget(),
+        ),
+        FFRoute(
+          name: BusinessOnboardWidget.routeName,
+          path: BusinessOnboardWidget.routePath,
+          builder: (context, params) => BusinessOnboardWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

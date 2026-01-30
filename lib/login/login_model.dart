@@ -5,6 +5,10 @@ import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
 
 class LoginModel extends FlutterFlowModel<LoginWidget> {
+  ///  Local state fields for this page.
+  /// User or Business Option
+  String signUpType = 'User';
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for TabBar widget.
