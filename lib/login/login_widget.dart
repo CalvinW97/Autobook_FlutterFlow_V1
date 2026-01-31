@@ -686,7 +686,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               context);
 
                                                       context.goNamedAuth(
-                                                          BusinessHomeWidget
+                                                          RoutingPageWidget
                                                               .routeName,
                                                           context.mounted);
                                                     },

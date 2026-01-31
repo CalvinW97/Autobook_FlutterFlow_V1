@@ -79,13 +79,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? BusinessHomeWidget() : LoginWidget(),
+          appStateNotifier.loggedIn ? RoutingPageWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? BusinessHomeWidget() : LoginWidget(),
+              appStateNotifier.loggedIn ? RoutingPageWidget() : LoginWidget(),
         ),
         FFRoute(
           name: VehicleDetailsPageWidget.routeName,
@@ -143,6 +143,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: BusinessOnboardWidget.routeName,
           path: BusinessOnboardWidget.routePath,
           builder: (context, params) => BusinessOnboardWidget(),
+        ),
+        FFRoute(
+          name: RoutingPageWidget.routeName,
+          path: RoutingPageWidget.routePath,
+          builder: (context, params) => RoutingPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

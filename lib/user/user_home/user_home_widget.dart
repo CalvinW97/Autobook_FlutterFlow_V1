@@ -1744,7 +1744,7 @@ class _UserHomeWidgetState extends State<UserHomeWidget> {
                   ),
                 ],
               ),
-            if (FFAppState().garageTabIndex == 3)
+            if (FFAppState().currentTab == 3)
               Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Column(
