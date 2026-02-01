@@ -28,6 +28,10 @@ class CreateServicePageModel extends FlutterFlowModel<CreateServicePageWidget> {
 
   // Stores action output result for [Backend Call - Query Rows] action in CreateServicePage widget.
   List<ProfilesRow>? userRow;
+  // Stores action output result for [Backend Call - Update Row(s)] action in IconButton widget.
+  List<ServicesRow>? rowUpdated;
+  // Stores action output result for [Backend Call - Insert Row] action in IconButton widget.
+  ServicesRow? rowInserted;
   // Model for Service_Template component.
   late ServiceTemplateModel serviceTemplateModel;
 

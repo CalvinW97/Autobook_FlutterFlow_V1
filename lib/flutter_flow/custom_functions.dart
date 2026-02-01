@@ -22,6 +22,7 @@ ServiceDataStructStruct? getDefaultMOT() {
     isInstantBookable: true,
     description: '''MOT Description''',
     type: 'MOT',
+    id: '',
   );
 }
 

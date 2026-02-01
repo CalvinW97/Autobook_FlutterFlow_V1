@@ -14,13 +14,19 @@ class ServiceDataStructStruct extends BaseStruct {
     bool? isInstantBookable,
     String? description,
     String? type,
+
+    /// Supabase id identifier (unique) of service.
+    ///
+    /// This is sued to check if the service already exists or not
+    String? id,
   })  : _name = name,
         _priceSmall = priceSmall,
         _priceMedium = priceMedium,
         _priceLarge = priceLarge,
         _isInstantBookable = isInstantBookable,
         _description = description,
-        _type = type;
+        _type = type,
+        _id = id;
 
   // "Name" field.
   String? _name;
@@ -78,6 +84,13 @@ class ServiceDataStructStruct extends BaseStruct {
 
   bool hasType() => _type != null;
 
+  // "ID" field.
+  String? _id;
+  String get id => _id ?? '';
+  set id(String? val) => _id = val;
+
+  bool hasId() => _id != null;
+
   static ServiceDataStructStruct fromMap(Map<String, dynamic> data) =>
       ServiceDataStructStruct(
         name: data['Name'] as String?,
@@ -87,6 +100,7 @@ class ServiceDataStructStruct extends BaseStruct {
         isInstantBookable: data['IsInstantBookable'] as bool?,
         description: data['Description'] as String?,
         type: data['Type'] as String?,
+        id: data['ID'] as String?,
       );
 
   static ServiceDataStructStruct? maybeFromMap(dynamic data) => data is Map
@@ -101,6 +115,7 @@ class ServiceDataStructStruct extends BaseStruct {
         'IsInstantBookable': _isInstantBookable,
         'Description': _description,
         'Type': _type,
+        'ID': _id,
       }.withoutNulls;
 
   @override
@@ -131,6 +146,10 @@ class ServiceDataStructStruct extends BaseStruct {
         ),
         'Type': serializeParam(
           _type,
+          ParamType.String,
+        ),
+        'ID': serializeParam(
+          _id,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -173,6 +192,11 @@ class ServiceDataStructStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        id: deserializeParam(
+          data['ID'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -187,7 +211,8 @@ class ServiceDataStructStruct extends BaseStruct {
         priceLarge == other.priceLarge &&
         isInstantBookable == other.isInstantBookable &&
         description == other.description &&
-        type == other.type;
+        type == other.type &&
+        id == other.id;
   }
 
   @override
@@ -198,7 +223,8 @@ class ServiceDataStructStruct extends BaseStruct {
         priceLarge,
         isInstantBookable,
         description,
-        type
+        type,
+        id
       ]);
 }
 
@@ -210,6 +236,7 @@ ServiceDataStructStruct createServiceDataStructStruct({
   bool? isInstantBookable,
   String? description,
   String? type,
+  String? id,
 }) =>
     ServiceDataStructStruct(
       name: name,
@@ -219,4 +246,5 @@ ServiceDataStructStruct createServiceDataStructStruct({
       isInstantBookable: isInstantBookable,
       description: description,
       type: type,
+      id: id,
     );

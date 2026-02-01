@@ -65,6 +65,7 @@ class _ServiceCardWidgetState extends State<ServiceCardWidget> {
                   description: widget.servicesList?.description,
                   priceSmall: widget.servicesList?.price,
                   isInstantBookable: widget.servicesList?.isInstantBooking,
+                  id: widget.servicesList?.id,
                 ),
                 ParamType.DataStruct,
               ),
