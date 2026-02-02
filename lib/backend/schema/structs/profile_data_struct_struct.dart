@@ -8,10 +8,26 @@ import '/flutter_flow/flutter_flow_util.dart';
 /// Strucutre to store user data
 class ProfileDataStructStruct extends BaseStruct {
   ProfileDataStructStruct({
+    /// Users frist name
     String? firstName,
+
+    /// Users last name
     String? lastName,
+
+    /// Users email
     String? email,
+
+    /// Users Role
+    /// User
+    /// Owner
+    /// Pending
+    /// Mechanic
     String? role,
+
+    /// ID of the garage associated with user.
+    ///
+    /// This only applies to garage staff (owners & mechanics), column is empty
+    /// for users
     String? garageID,
   })  : _firstName = firstName,
         _lastName = lastName,

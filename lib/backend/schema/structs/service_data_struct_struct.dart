@@ -11,13 +11,24 @@ class ServiceDataStructStruct extends BaseStruct {
     double? priceSmall,
     double? priceMedium,
     double? priceLarge,
+
+    /// Checkbox and filter if the service is instant bookable
     bool? isInstantBookable,
+
+    /// Description of service provided ie
+    /// Oil Change
+    /// Filter change etc
     String? description,
+
+    /// Type of service garage provides, such as MOT, Tyres or service.
+    ///
+    /// Will be used to filter user search.
+    /// MAY BE CHANGED TO ENUM TYPE
     String? type,
 
     /// Supabase id identifier (unique) of service.
     ///
-    /// This is sued to check if the service already exists or not
+    /// This is used to check if the service already exists or not
     String? id,
   })  : _name = name,
         _priceSmall = priceSmall,

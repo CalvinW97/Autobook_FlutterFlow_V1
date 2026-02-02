@@ -12,6 +12,7 @@ import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/auth/supabase_auth/auth_util.dart';
 
+/// Function to populate the service data structure for MOT template
 ServiceDataStructStruct? getDefaultMOT() {
   // Function to populate my serviceDataStruct data type strucutre with default values
   return ServiceDataStructStruct(
@@ -26,6 +27,7 @@ ServiceDataStructStruct? getDefaultMOT() {
   );
 }
 
+/// Function to populate the service data structure for Service template
 ServiceDataStructStruct? getDefaultService() {
   // Function to populate my serviceDataStruct data type strucutre with default values
   return ServiceDataStructStruct(
@@ -46,6 +48,7 @@ Includes:
   );
 }
 
+/// Function to populate the service data structure for Custom template
 ServiceDataStructStruct? getDefaultCustom() {
   // Function to populate my serviceDataStruct data type strucutre with default values
   return ServiceDataStructStruct(

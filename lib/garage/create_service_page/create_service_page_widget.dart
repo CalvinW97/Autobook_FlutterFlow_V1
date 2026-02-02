@@ -1,10 +1,10 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/delete_service_confirm_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/garage/delete_service_confirm/delete_service_confirm_widget.dart';
 import '/garage/service_template/service_template_widget.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +19,7 @@ class CreateServicePageWidget extends StatefulWidget {
     required this.serviceDataIn,
   });
 
+  /// Service data structure input parameter to populate service template fields
   final ServiceDataStructStruct? serviceDataIn;
 
   static String routeName = 'CreateServicePage';
@@ -179,6 +180,7 @@ class _CreateServicePageWidgetState extends State<CreateServicePageWidget> {
                               onPressed: () async {
                                 if (widget.serviceDataIn?.id != null &&
                                     widget.serviceDataIn?.id != '') {
+                                  // Update service with new data
                                   _model.rowUpdated =
                                       await ServicesTable().update(
                                     data: {
@@ -248,6 +250,7 @@ class _CreateServicePageWidgetState extends State<CreateServicePageWidget> {
                                     );
                                   }
                                 } else {
+                                  // Add row to service supabase table
                                   _model.rowInserted =
                                       await ServicesTable().insert({
                                     'garage_id':

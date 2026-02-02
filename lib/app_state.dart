@@ -40,6 +40,7 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
+  /// Selector for user tab
   int _currentTab = 0;
   int get currentTab => _currentTab;
   set currentTab(int value) {
@@ -75,13 +76,18 @@ class FFAppState extends ChangeNotifier {
     myRegistration.insert(index, value);
   }
 
-  /// Selector for garage tab
+  /// Selector for garage page
   int _garageTabIndex = 0;
   int get garageTabIndex => _garageTabIndex;
   set garageTabIndex(int value) {
     _garageTabIndex = value;
   }
 
+  /// Global variable which contains a users key information such as Names,
+  /// role, garage ID etc.
+  ///
+  /// This is populated during app loading/ sign in. This redcues the number of
+  /// supabase queries needed as the user navigates through the app.
   ProfileDataStructStruct _ProfileData =
       ProfileDataStructStruct.fromSerializableMap(jsonDecode('{}'));
   ProfileDataStructStruct get ProfileData => _ProfileData;

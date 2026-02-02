@@ -34,7 +34,11 @@ class _RoutingPageWidgetState extends State<RoutingPageWidget> {
       if (FFAppState().ProfileData.role == 'user') {
         context.pushNamed(UserHomeWidget.routeName);
       } else {
-        context.pushNamed(BusinessHomeWidget.routeName);
+        if (FFAppState().ProfileData.role == 'pending') {
+          context.pushNamed(BusinessOnboardWidget.routeName);
+        } else {
+          context.pushNamed(BusinessHomeWidget.routeName);
+        }
       }
     });
   }
