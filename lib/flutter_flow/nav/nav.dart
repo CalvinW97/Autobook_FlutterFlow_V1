@@ -88,16 +88,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? RoutingPageWidget() : LoginWidget(),
         ),
         FFRoute(
-          name: VehicleDetailsPageWidget.routeName,
-          path: VehicleDetailsPageWidget.routePath,
-          builder: (context, params) => VehicleDetailsPageWidget(
-            carID: params.getParam(
-              'carID',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
           name: JobDetailsPageWidget.routeName,
           path: JobDetailsPageWidget.routePath,
           builder: (context, params) => JobDetailsPageWidget(
@@ -108,14 +98,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
+          name: BusinessOnboardWidget.routeName,
+          path: BusinessOnboardWidget.routePath,
+          builder: (context, params) => BusinessOnboardWidget(),
+        ),
+        FFRoute(
+          name: VehicleDetailsPageWidget.routeName,
+          path: VehicleDetailsPageWidget.routePath,
+          builder: (context, params) => VehicleDetailsPageWidget(
+            carID: params.getParam(
+              'carID',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
           name: LoginWidget.routeName,
           path: LoginWidget.routePath,
           builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: BusinessHomeWidget.routeName,
-          path: BusinessHomeWidget.routePath,
-          builder: (context, params) => BusinessHomeWidget(),
+          name: RoutingPageWidget.routeName,
+          path: RoutingPageWidget.routePath,
+          builder: (context, params) => RoutingPageWidget(),
+        ),
+        FFRoute(
+          name: UserOnboardWidget.routeName,
+          path: UserOnboardWidget.routePath,
+          builder: (context, params) => UserOnboardWidget(),
         ),
         FFRoute(
           name: ServicesHomePageWidget.routeName,
@@ -123,16 +133,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ServicesHomePageWidget(),
         ),
         FFRoute(
-          name: CreateServicePageWidget.routeName,
-          path: CreateServicePageWidget.routePath,
-          builder: (context, params) => CreateServicePageWidget(
-            serviceDataIn: params.getParam(
-              'serviceDataIn',
-              ParamType.DataStruct,
-              isList: false,
-              structBuilder: ServiceDataStructStruct.fromSerializableMap,
-            ),
-          ),
+          name: BusinessHomeWidget.routeName,
+          path: BusinessHomeWidget.routePath,
+          builder: (context, params) => BusinessHomeWidget(),
         ),
         FFRoute(
           name: UserHomeWidget.routeName,
@@ -140,14 +143,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => UserHomeWidget(),
         ),
         FFRoute(
-          name: BusinessOnboardWidget.routeName,
-          path: BusinessOnboardWidget.routePath,
-          builder: (context, params) => BusinessOnboardWidget(),
+          name: ListingPageWidget.routeName,
+          path: ListingPageWidget.routePath,
+          builder: (context, params) => ListingPageWidget(
+            listingData: params.getParam(
+              'listingData',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: ListingDataStruct.fromSerializableMap,
+            ),
+          ),
         ),
         FFRoute(
-          name: RoutingPageWidget.routeName,
-          path: RoutingPageWidget.routePath,
-          builder: (context, params) => RoutingPageWidget(),
+          name: EditServicePageWidget.routeName,
+          path: EditServicePageWidget.routePath,
+          builder: (context, params) => EditServicePageWidget(
+            serviceIDIn: params.getParam(
+              'serviceIDIn',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: CreateServicePageWidget.routeName,
+          path: CreateServicePageWidget.routePath,
+          builder: (context, params) => CreateServicePageWidget(),
+        ),
+        FFRoute(
+          name: EditPriceAdjustmentPageWidget.routeName,
+          path: EditPriceAdjustmentPageWidget.routePath,
+          builder: (context, params) => EditPriceAdjustmentPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -349,6 +374,7 @@ class FFRoute {
           return transitionInfo.hasTransition
               ? CustomTransitionPage(
                   key: state.pageKey,
+                  name: state.name,
                   child: child,
                   transitionDuration: transitionInfo.duration,
                   transitionsBuilder:
@@ -366,7 +392,8 @@ class FFRoute {
                     child,
                   ),
                 )
-              : MaterialPage(key: state.pageKey, child: child);
+              : MaterialPage(
+                  key: state.pageKey, name: state.name, child: child);
         },
         routes: routes,
       );

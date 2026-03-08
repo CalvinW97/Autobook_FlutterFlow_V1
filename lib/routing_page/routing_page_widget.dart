@@ -32,7 +32,11 @@ class _RoutingPageWidgetState extends State<RoutingPageWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await action_blocks.syncUserSession(context);
       if (FFAppState().ProfileData.role == 'user') {
-        context.pushNamed(UserHomeWidget.routeName);
+        if (FFAppState().ProfileData.firstName != '') {
+          context.pushNamed(UserHomeWidget.routeName);
+        } else {
+          context.pushNamed(UserOnboardWidget.routeName);
+        }
       } else {
         if (FFAppState().ProfileData.role == 'pending') {
           context.pushNamed(BusinessOnboardWidget.routeName);

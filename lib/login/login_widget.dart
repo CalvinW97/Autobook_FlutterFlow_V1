@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -125,6 +126,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -684,11 +687,30 @@ class _LoginWidgetState extends State<LoginWidget>
                                                       await action_blocks
                                                           .syncUserSession(
                                                               context);
-
-                                                      context.goNamedAuth(
-                                                          RoutingPageWidget
-                                                              .routeName,
-                                                          context.mounted);
+                                                      if (FFAppState()
+                                                              .ProfileData
+                                                              .role !=
+                                                          'pending') {
+                                                        if (FFAppState()
+                                                                .ProfileData
+                                                                .role ==
+                                                            'user') {
+                                                          context.pushNamedAuth(
+                                                              UserHomeWidget
+                                                                  .routeName,
+                                                              context.mounted);
+                                                        } else {
+                                                          context.pushNamedAuth(
+                                                              BusinessHomeWidget
+                                                                  .routeName,
+                                                              context.mounted);
+                                                        }
+                                                      } else {
+                                                        context.pushNamedAuth(
+                                                            BusinessOnboardWidget
+                                                                .routeName,
+                                                            context.mounted);
+                                                      }
                                                     },
                                                     text: 'Sign In',
                                                     options: FFButtonOptions(
@@ -1823,13 +1845,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             .insert({
                                                           'id': currentUserUid,
                                                           'role': 'user',
+                                                          'email':
+                                                              currentUserEmail,
                                                         });
                                                         await action_blocks
                                                             .syncUserSession(
                                                                 context);
 
                                                         context.pushNamedAuth(
-                                                            UserHomeWidget
+                                                            UserOnboardWidget
                                                                 .routeName,
                                                             context.mounted);
                                                       } else {
@@ -1837,6 +1861,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             .insert({
                                                           'id': currentUserUid,
                                                           'role': 'pending',
+                                                          'email':
+                                                              currentUserEmail,
                                                         });
                                                         await action_blocks
                                                             .syncUserSession(

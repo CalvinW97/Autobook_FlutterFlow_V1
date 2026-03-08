@@ -17,9 +17,6 @@ class ProfilesRow extends SupabaseDataRow {
   String get id => getField<String>('id')!;
   set id(String value) => setField<String>('id', value);
 
-  String? get fullName => getField<String>('full_name');
-  set fullName(String? value) => setField<String>('full_name', value);
-
   String? get email => getField<String>('email');
   set email(String? value) => setField<String>('email', value);
 
@@ -34,4 +31,31 @@ class ProfilesRow extends SupabaseDataRow {
 
   String? get garageId => getField<String>('garage_id');
   set garageId(String? value) => setField<String>('garage_id', value);
+
+  String? get addressLine1 => getField<String>('address_line_1');
+  set addressLine1(String? value) => setField<String>('address_line_1', value);
+
+  String? get addressLine2 => getField<String>('address_line_2');
+  set addressLine2(String? value) => setField<String>('address_line_2', value);
+
+  String? get city => getField<String>('city');
+  set city(String? value) => setField<String>('city', value);
+
+  double? get latitude => getField<double>('latitude');
+  set latitude(double? value) => setField<double>('latitude', value);
+
+  double? get longitude => getField<double>('longitude');
+  set longitude(double? value) => setField<double>('longitude', value);
+
+  String? get geoLocation => getField<String>('geo_location');
+  set geoLocation(String? value) => setField<String>('geo_location', value);
+
+  String? get firstName => getField<String>('first_name');
+  set firstName(String? value) => setField<String>('first_name', value);
+
+  String? get lastName => getField<String>('last_name');
+  set lastName(String? value) => setField<String>('last_name', value);
+
+  String? get type => getField<String>('type');
+  set type(String? value) => setField<String>('type', value);
 }

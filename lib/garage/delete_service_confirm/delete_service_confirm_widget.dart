@@ -1,4 +1,4 @@
-import '/backend/schema/structs/index.dart';
+import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,12 +16,7 @@ export 'delete_service_confirm_model.dart';
 /// replaced with another that asks the user to confirm the car details. make
 /// model year, colour etc
 class DeleteServiceConfirmWidget extends StatefulWidget {
-  const DeleteServiceConfirmWidget({
-    super.key,
-    required this.serviceDataIn,
-  });
-
-  final ServiceDataStructStruct? serviceDataIn;
+  const DeleteServiceConfirmWidget({super.key});
 
   @override
   State<DeleteServiceConfirmWidget> createState() =>
@@ -174,10 +169,10 @@ class _DeleteServiceConfirmWidgetState
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       _model.isDeleted =
-                                          await ServicesTable().delete(
+                                          await ServiceOfferingsTable().delete(
                                         matchingRows: (rows) => rows.eqOrNull(
-                                          'id',
-                                          widget.serviceDataIn?.id,
+                                          'garage_id',
+                                          currentUserUid,
                                         ),
                                         returnRows: true,
                                       );

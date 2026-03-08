@@ -8,7 +8,7 @@ class DeleteServiceConfirmModel
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Backend Call - Delete Row(s)] action in Button widget.
-  List<ServicesRow>? isDeleted;
+  List<ServiceOfferingsRow>? isDeleted;
 
   @override
   void initState(BuildContext context) {}

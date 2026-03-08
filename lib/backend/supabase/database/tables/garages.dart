@@ -60,4 +60,25 @@ class GaragesRow extends SupabaseDataRow {
   String get companyRegNumber => getField<String>('company_reg_number')!;
   set companyRegNumber(String value) =>
       setField<String>('company_reg_number', value);
+
+  String? get geoLocation => getField<String>('geo_location');
+  set geoLocation(String? value) => setField<String>('geo_location', value);
+
+  String? get description => getField<String>('description');
+  set description(String? value) => setField<String>('description', value);
+
+  String? get images => getField<String>('images');
+  set images(String? value) => setField<String>('images', value);
+
+  double? get avgRating => getField<double>('avg_rating');
+  set avgRating(double? value) => setField<double>('avg_rating', value);
+
+  dynamic get openingHours => getField<dynamic>('opening_hours');
+  set openingHours(dynamic value) => setField<dynamic>('opening_hours', value);
+
+  bool? get isActive => getField<bool>('is_active');
+  set isActive(bool? value) => setField<bool>('is_active', value);
+
+  int? get reviewCount => getField<int>('review_count');
+  set reviewCount(int? value) => setField<int>('review_count', value);
 }

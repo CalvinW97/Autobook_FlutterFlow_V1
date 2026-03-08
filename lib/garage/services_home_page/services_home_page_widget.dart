@@ -2,10 +2,9 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/garage/service_card/service_card_widget.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'services_home_page_model.dart';
 export 'services_home_page_model.dart';
@@ -105,16 +104,7 @@ class _ServicesHomePageWidgetState extends State<ServicesHomePageWidget> {
                               ),
                               onPressed: () async {
                                 context.pushNamed(
-                                  CreateServicePageWidget.routeName,
-                                  queryParameters: {
-                                    'serviceDataIn': serializeParam(
-                                      functions.getDefaultMOT(),
-                                      ParamType.DataStruct,
-                                    ),
-                                  }.withoutNulls,
-                                );
-
-                                FFAppState().clearServicesListCache();
+                                    CreateServicePageWidget.routeName);
                               },
                             ),
                           ],
@@ -130,15 +120,12 @@ class _ServicesHomePageWidgetState extends State<ServicesHomePageWidget> {
                 Expanded(
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 100.0),
-                    child: FutureBuilder<List<ServicesRow>>(
-                      future: FFAppState().servicesList(
-                        overrideCache: true,
-                        requestFn: () => ServicesTable().queryRows(
-                          queryFn: (q) => q.eqOrNull(
-                            'garage_id',
-                            FFAppState().ProfileData.garageID,
-                          ),
+                        EdgeInsetsDirectional.fromSTEB(15.0, 25.0, 15.0, 100.0),
+                    child: FutureBuilder<List<ServiceOfferingsRow>>(
+                      future: ServiceOfferingsTable().queryRows(
+                        queryFn: (q) => q.eqOrNull(
+                          'garage_id',
+                          FFAppState().ProfileData.garageID,
                         ),
                       ),
                       builder: (context, snapshot) {
@@ -156,22 +143,99 @@ class _ServicesHomePageWidgetState extends State<ServicesHomePageWidget> {
                             ),
                           );
                         }
-                        List<ServicesRow> listViewServicesRowList =
-                            snapshot.data!;
+                        List<ServiceOfferingsRow>
+                            listViewServiceOfferingsRowList = snapshot.data!;
 
-                        return ListView.separated(
+                        return ListView.builder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemCount: listViewServicesRowList.length,
-                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
+                          itemCount: listViewServiceOfferingsRowList.length,
                           itemBuilder: (context, listViewIndex) {
-                            final listViewServicesRow =
-                                listViewServicesRowList[listViewIndex];
-                            return ServiceCardWidget(
-                              key: Key(
-                                  'Keyeu3_${listViewIndex}_of_${listViewServicesRowList.length}'),
-                              servicesList: listViewServicesRow,
+                            final listViewServiceOfferingsRow =
+                                listViewServiceOfferingsRowList[listViewIndex];
+                            return Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    EditServicePageWidget.routeName,
+                                    queryParameters: {
+                                      'serviceIDIn': serializeParam(
+                                        listViewServiceOfferingsRow.id,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                child: Container(
+                                  width: 100.0,
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 4.0,
+                                        color: Color(0x33000000),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            valueOrDefault<String>(
+                                              listViewServiceOfferingsRow
+                                                  .serviceName,
+                                              'Service_Name',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleMedium
+                                                .override(
+                                                  font: GoogleFonts.interTight(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             );
                           },
                         );

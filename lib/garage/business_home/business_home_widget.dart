@@ -782,7 +782,88 @@ class _BusinessHomeWidgetState extends State<BusinessHomeWidget> {
                               Expanded(
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  children: [],
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        width: 100.0,
+                                        height: 100.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                        ),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            context.pushNamed(
+                                                EditPriceAdjustmentPageWidget
+                                                    .routeName);
+                                          },
+                                          child: Material(
+                                            color: Colors.transparent,
+                                            child: ListTile(
+                                              leading: Icon(
+                                                Icons.format_list_bulleted,
+                                              ),
+                                              title: Text(
+                                                'Price Adjustments',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleLarge
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .interTight(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLarge
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleLarge
+                                                                  .fontStyle,
+                                                        ),
+                                              ),
+                                              trailing: Icon(
+                                                Icons.arrow_forward_ios_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
+                                              ),
+                                              tileColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              dense: false,
+                                              contentPadding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 0.0, 12.0, 0.0),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                               Expanded(

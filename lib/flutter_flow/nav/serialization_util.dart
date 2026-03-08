@@ -218,18 +218,32 @@ dynamic deserializeParam<T>(
         switch (T) {
           case GaragesRow:
             return GaragesRow(data);
+          case ServicePriceAdjustmentRow:
+            return ServicePriceAdjustmentRow(data);
           case VehiclesRow:
             return VehiclesRow(data);
           case JobsRow:
             return JobsRow(data);
           case ProfilesRow:
             return ProfilesRow(data);
+          case SizePriceAdjustmentRow:
+            return SizePriceAdjustmentRow(data);
           case GarageStaffRow:
             return GarageStaffRow(data);
           case ServicesRow:
             return ServicesRow(data);
+          case PriceAdjustmentSeedRow:
+            return PriceAdjustmentSeedRow(data);
+          case EnginePriceAdjustmentRow:
+            return EnginePriceAdjustmentRow(data);
+          case FuelPriceAdjustmentRow:
+            return FuelPriceAdjustmentRow(data);
           case MessagesRow:
             return MessagesRow(data);
+          case ServiceOfferingsRow:
+            return ServiceOfferingsRow(data);
+          case ServiceTemplatesRow:
+            return ServiceTemplatesRow(data);
           default:
             return null;
         }

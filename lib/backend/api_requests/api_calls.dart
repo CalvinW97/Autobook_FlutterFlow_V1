@@ -15,7 +15,7 @@ class VehicleRegCallCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "registrationNum": "${escapeStringForJson(registration)}"
+  "registration": "${escapeStringForJson(registration)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'VehicleRegCall',
@@ -67,6 +67,156 @@ class VehicleRegCallCall {
         response,
         r'''$.motExpiryDate''',
       ));
+}
+
+class GarageLocationCallCall {
+  static Future<ApiCallResponse> call({
+    double? userLat,
+    double? userLon,
+    double? maxDist,
+    String? search = '',
+    bool? isInstantBooking,
+    String? vSize = '',
+    String? vFuel = '',
+    String? vCcRange = '',
+    bool? vIsPremium,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "user_lat": ${userLat},
+  "user_lng": ${userLon},
+  "search_service_type": "${escapeStringForJson(search)}",
+  "max_dist_miles": ${maxDist},
+  "v_size":"${escapeStringForJson(vSize)}",
+  "v_fuel":"${escapeStringForJson(vFuel)}",
+  "v_cc_range":"${escapeStringForJson(vCcRange)}",
+  "v_is_premium":${vIsPremium},
+  "p_is_instant_booking": ${isInstantBooking}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'GarageLocationCall',
+      apiUrl:
+          'https://btvwzlnuqyuawapthbrg.supabase.co/rest/v1/rpc/search_garages',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dnd6bG51cXl1YXdhcHRoYnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5Mzk1OTEsImV4cCI6MjA4MzUxNTU5MX0.ld6HhvKmEAMhnvk0qfCGM2hQsFNlcbHIzihSc6IyX5Q',
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dnd6bG51cXl1YXdhcHRoYnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5Mzk1OTEsImV4cCI6MjA4MzUxNTU5MX0.ld6HhvKmEAMhnvk0qfCGM2hQsFNlcbHIzihSc6IyX5Q',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<int>? distanceMiles(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].dist_miles''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? businessNames(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].business_name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? garageIDs(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].garage_id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List? matchedServices(dynamic response) => getJsonField(
+        response,
+        r'''$[:].matched_services''',
+        true,
+      ) as List?;
+  static List<double>? prices(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].matched_services[:].price''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? serviceIDs(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].matched_services[:].service_id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? serviceNames(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].matched_services[:].service_name''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? minServicePrices(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].min_service_price''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+}
+
+class GetServiceOfferingsCallCall {
+  static Future<ApiCallResponse> call({
+    String? garageId = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "target_garage_id": "${escapeStringForJson(garageId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetServiceOfferingsCall',
+      apiUrl:
+          'https://btvwzlnuqyuawapthbrg.supabase.co/rest/v1/rpc/get_garage_services',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dnd6bG51cXl1YXdhcHRoYnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5Mzk1OTEsImV4cCI6MjA4MzUxNTU5MX0.ld6HhvKmEAMhnvk0qfCGM2hQsFNlcbHIzihSc6IyX5Q',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0dnd6bG51cXl1YXdhcHRoYnJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5Mzk1OTEsImV4cCI6MjA4MzUxNTU5MX0.ld6HhvKmEAMhnvk0qfCGM2hQsFNlcbHIzihSc6IyX5Q',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class ApiPagingParams {

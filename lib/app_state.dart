@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'flutter_flow/request_manager.dart';
 import '/backend/schema/structs/index.dart';
-import 'backend/supabase/supabase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
@@ -101,20 +99,50 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_ProfileData', _ProfileData.serialize());
   }
 
-  final _servicesListManager = FutureRequestManager<List<ServicesRow>>();
-  Future<List<ServicesRow>> servicesList({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<List<ServicesRow>> Function() requestFn,
-  }) =>
-      _servicesListManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearServicesListCache() => _servicesListManager.clear();
-  void clearServicesListCacheKey(String? uniqueKey) =>
-      _servicesListManager.clearRequest(uniqueKey);
+  /// This is the default or selected vehicle of the user.
+  ///
+  /// Use Vehicle ID only
+  String _userVehicle = '';
+  String get userVehicle => _userVehicle;
+  set userVehicle(String value) {
+    _userVehicle = value;
+  }
+
+  /// List of labels for price adjustment depending on vehicle fuel type
+  List<String> _fuelPriceAdjustmentLabels = [
+    'Petrol',
+    'Diesel',
+    'Hybrid',
+    'EV'
+  ];
+  List<String> get fuelPriceAdjustmentLabels => _fuelPriceAdjustmentLabels;
+  set fuelPriceAdjustmentLabels(List<String> value) {
+    _fuelPriceAdjustmentLabels = value;
+  }
+
+  void addToFuelPriceAdjustmentLabels(String value) {
+    fuelPriceAdjustmentLabels.add(value);
+  }
+
+  void removeFromFuelPriceAdjustmentLabels(String value) {
+    fuelPriceAdjustmentLabels.remove(value);
+  }
+
+  void removeAtIndexFromFuelPriceAdjustmentLabels(int index) {
+    fuelPriceAdjustmentLabels.removeAt(index);
+  }
+
+  void updateFuelPriceAdjustmentLabelsAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    fuelPriceAdjustmentLabels[index] =
+        updateFn(_fuelPriceAdjustmentLabels[index]);
+  }
+
+  void insertAtIndexInFuelPriceAdjustmentLabels(int index, String value) {
+    fuelPriceAdjustmentLabels.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {

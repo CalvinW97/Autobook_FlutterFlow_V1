@@ -23,6 +23,6 @@ class GarageStaffRow extends SupabaseDataRow {
   String? get userId => getField<String>('user_id');
   set userId(String? value) => setField<String>('user_id', value);
 
-  String? get userRole => getField<String>('user_role');
-  set userRole(String? value) => setField<String>('user_role', value);
+  String? get staffType => getField<String>('staff_type');
+  set staffType(String? value) => setField<String>('staff_type', value);
 }

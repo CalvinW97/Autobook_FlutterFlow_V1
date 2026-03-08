@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -12,10 +11,10 @@ export 'service_card_model.dart';
 class ServiceCardWidget extends StatefulWidget {
   const ServiceCardWidget({
     super.key,
-    required this.servicesList,
+    required this.serviceID,
   });
 
-  final ServicesRow? servicesList;
+  final String? serviceID;
 
   @override
   State<ServiceCardWidget> createState() => _ServiceCardWidgetState();
@@ -53,24 +52,26 @@ class _ServiceCardWidgetState extends State<ServiceCardWidget> {
         hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () async {
+          _model.serviceOffering = await ServiceOfferingsTable().queryRows(
+            queryFn: (q) => q.eqOrNull(
+              'id',
+              widget.serviceID,
+            ),
+          );
+
           safeSetState(() {});
 
           context.pushNamed(
-            CreateServicePageWidget.routeName,
+            EditServicePageWidget.routeName,
             queryParameters: {
-              'serviceDataIn': serializeParam(
-                ServiceDataStructStruct(
-                  name: widget.servicesList?.name,
-                  type: widget.servicesList?.type,
-                  description: widget.servicesList?.description,
-                  priceSmall: widget.servicesList?.price,
-                  isInstantBookable: widget.servicesList?.isInstantBooking,
-                  id: widget.servicesList?.id,
-                ),
-                ParamType.DataStruct,
+              'serviceIDIn': serializeParam(
+                widget.serviceID,
+                ParamType.String,
               ),
             }.withoutNulls,
           );
+
+          safeSetState(() {});
         },
         child: Container(
           width: MediaQuery.sizeOf(context).width * 1.0,
@@ -115,7 +116,11 @@ class _ServiceCardWidgetState extends State<ServiceCardWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 5.0),
                                   child: Text(
-                                    widget.servicesList!.name!,
+                                    valueOrDefault<String>(
+                                      _model.serviceOffering?.firstOrNull
+                                          ?.serviceName,
+                                      'Service Name',
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .titleLarge
                                         .override(
@@ -158,7 +163,11 @@ class _ServiceCardWidgetState extends State<ServiceCardWidget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 2.0),
                         child: Text(
-                          widget.servicesList!.type!,
+                          valueOrDefault<String>(
+                            _model.serviceOffering?.firstOrNull?.durationMintues
+                                ?.toString(),
+                            '0',
+                          ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     font: GoogleFonts.inter(
@@ -191,7 +200,10 @@ class _ServiceCardWidgetState extends State<ServiceCardWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          widget.servicesList!.price!.toString(),
+                          valueOrDefault<String>(
+                            _model.serviceOffering?.firstOrNull?.type,
+                            'SERVICING',
+                          ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     font: GoogleFonts.inter(
